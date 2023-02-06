@@ -1,34 +1,33 @@
-#include <stdio.h>  
-#include <conio.h>
-#include <stdlib.h>
-void selection(int array[], int n)  
-{  
-    int i, j, minimum;  
-    for (i = 0; i < n-1; i++)
-    {  
-        minimum = i;
-        for (j = i+1; j < n; j++)  
-        if (array[j] < array[minimum])  
-            minimum = j;  
-    int temp = array[minimum]; // Replace the first element with the minimum element.
-    array[minimum] = array[i];  
-    array[i] = temp;  
-    }  
-}  
-void printArr(int array1[], int n) //function to print the array//
-{  
-    int i;  
-    for (i = 0; i < n; i++)  
-        printf("%d ", array1[i]);  
-}  
-int main()  
-{  
-    int array1[] = { 15, 30, 29, 14, 39, 11 };  
-    int n = sizeof(array1) / sizeof(array1[0]);  
-    printf(" An array before sorting: - \n");  
-    printArr(array1, n);  
-    selection(array1, n);  
-    printf("\nAn Array after sorting- \n");    
-    printArr(array1, n);  
-    return 0;  
+#include <stdio.h>
+void swap(int *a, int *b) {
+  int temp = *a;
+  *a = *b;
+  *b = temp;
+}
+
+void selectionSort(int array[], int size) {
+  for (int step = 0; step < size - 1; step++) {
+    int min_idx = step;
+    for (int i = step + 1; i < size; i++) {
+
+      if (array[i] < array[min_idx])
+        min_idx = i;
+    }
+    swap(&array[min_idx], &array[step]);
+  }
+}
+void printArray(int array[], int size) {
+  for (int i = 0; i < size; ++i) {
+    printf("%d  ", array[i]);
+  }
+  printf("\n");
+}
+
+// driver code
+int main() {
+  int data[] = {20, 12, 10, 15, 2};
+  int size = sizeof(data) / sizeof(data[0]);
+  selectionSort(data, size);
+  printf("Sorted array in Acsending Order:\n");
+  printArray(data, size);
 }
